@@ -1,4 +1,4 @@
-package com.example;
+package com.example.hashmap;
 
 public class MyHashMap<K, V> {
 
