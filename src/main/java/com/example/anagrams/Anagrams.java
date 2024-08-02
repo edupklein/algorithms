@@ -1,6 +1,5 @@
 package com.example.anagrams;
 
-import java.lang.reflect.Array;
 import java.util.*;
 
 public class Anagrams {
