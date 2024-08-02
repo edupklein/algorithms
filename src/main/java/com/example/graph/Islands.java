@@ -124,14 +124,36 @@ public class Islands {
 
     private Cell findNextAccessibleCell(Cell currentCell, Map<String, Cell> alreadyVisited) {
 
+        List<String> pile = new ArrayList<>();
+
+        List<String> pileVisited = new ArrayList<>();
+        
         for(Cell adjacentNode: this.graph.get(currentCell.hashKey())) {
             if(!alreadyVisited.containsKey(adjacentNode.hashKey())) {
                 return adjacentNode;
+            }else{
+                pile.add(adjacentNode.hashKey());
             }
         }
+        while(pile.size() > 0) {
+
+            String key = pile.get(pile.size() - 1);
+            pile.remove(key);
+
+            for(Cell adjacentNode: this.graph.get(key)) {
+                if(!alreadyVisited.containsKey(adjacentNode.hashKey())) {
+                    return adjacentNode;
+                }else{
+                    if(!pileVisited.contains(adjacentNode.hashKey())) {
+                        pile.add(adjacentNode.hashKey());
+                        pileVisited.add(adjacentNode.hashKey());
+                    }
+                }
+            }
+
+        }
+
         return null;
     }
-
-    
 
 }
