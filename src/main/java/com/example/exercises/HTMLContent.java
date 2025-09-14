@@ -30,12 +30,18 @@ public class HTMLContent{
         for(int i = 0; i < lines.length; i++) {
             String line = lines[i];
             String regex = "<([\\w\\s]+)>([^<>]*)</\\1>";
+            String regexInvalids = "<([\\w\\s]+)>([^<>]*)<([^\\/])";
 
             Pattern p = Pattern.compile(regex);
+            Pattern pInvalid = Pattern.compile(regexInvalids);
             List<String> contents = new ArrayList<>();
 
             boolean found;
             do {
+                Matcher mInvalid = pInvalid.matcher(line);
+                while(mInvalid.find()) {
+                    line = line.replace(mInvalid.group(2), "");
+                }
                 Matcher m = p.matcher(line);
                 found = false;
                 while(m.find()) {
